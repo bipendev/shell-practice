@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Arguments
+#Passing the values as Arguments
 PERSON1=$1
 PERSON2=$2
 

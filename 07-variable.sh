@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+# dynamic execution of commands by passing a variable
 START_TIME=$(date +%s)
 
 sleep 10 

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Declaring the variable inside the script
 
 PERSON1=Ramesh
 PERSON2=Suresh
