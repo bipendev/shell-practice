@@ -4,6 +4,6 @@ PERSON1=$1
 PERSON2=$2
 
 echo "$PERSON1: Welocme to Alaska $PERSON2"
-echo "Putim: Thank you $PERSON1. Finally not on zoom webinar"
+echo "Putin: Thank you $PERSON1. Finally not on zoom webinar"
 echo "$PERSON1: So, do we have a deal"
 echo " $PERSON2: yes, if you make Ukrain join Russia"
