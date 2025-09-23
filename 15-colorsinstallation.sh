@@ -33,6 +33,8 @@ if [ $? -ne 0 ]; then
     VALIDATE $? "MySQL"
 else
     echo  -e "MySQL already exist ....$G SKIPPING $N "
+fi
+
 
 dnf list installed nginx
 # Install if it is not found
@@ -41,6 +43,7 @@ if [ $? -ne 0 ]; then
     VALIDATE $? "Nginx"
 else
     echo -e "Nginx already exist ....$G SKIPPING $N "
+fi
 
 
 dnf list installed python
