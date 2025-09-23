@@ -50,3 +50,4 @@ if [ $? -ne 0 ]; then
     VALIDATE $? "python3"
 else
     echo -e "python3 already exist ....$G SKIPPING $N "
+fi
