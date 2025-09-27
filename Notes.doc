@@ -1,0 +1,142 @@
+#####DevSecOps with AWS - 86S
+
+Demo Session
+    31-AUG-2025
+        Why DevSecOps is popular
+        JoinDevOps platform features
+        Mentorship sessions
+        Interview preparation
+        What is DevOps?
+Session-01:
+    01-SEP-2025
+        What is SDLC?
+        Waterfall vs Agile vs DevOps
+        What is DevOps?
+        Linux
+Session-02:
+    02-SEP-2025
+        AWS account creation
+        Linux vs Windows
+        SSH Keys
+        Firewall creation
+        Launch instance
+        Connect instance
+Session-03:
+    03-SEP-2025
+        Linux commands
+        Touch, cat, ls, uname, curl, wget, grep, cut, awk
+Session-04:
+    04-SEP-2025
+        Vim editor
+        User management
+        Permissions
+Session-05:
+    05-SEP-2025
+        File ownership
+        User management
+        Package management
+        Service management
+Session-06:
+    08-SEP-2025
+        Process management
+        Network management
+        3 tier architecture
+Session-07:
+    09-SEP-2025
+        Linux is Kernel
+        Installing Mobaxterm
+        Expense project
+        Database installation
+        Application Server
+Session-08:
+    10-SEP-2025
+        How internet works
+        Public IP vs Private IP
+        Expense project completed
+Session-09:
+    11-SEP-2025
+        How does DNS work?
+        Forward proxy vs Reverse proxy
+Session-10:
+    2-SEP-2025
+        Forward vs Reverse proxy
+        HTTP methods and status codes
+        Inodes symlink hardlink
+Session-11:
+    15-SEP-2025
+        Roboshop Start
+        MongoDB
+        Catalogue
+        Frontend
+        Redis
+        User
+        Cart
+Session-12:
+    16-SEP-2025
+        Roboshop Start
+        MySQL
+        Shipping
+Session-13:
+    17-SEP-2025
+        Roboshop Start
+        RabbitMQ
+        Payment
+        Dispatch
+        Sync vs Asynchronous
+        Shell Scripting
+Session-14:
+    18-SEP-2025
+        Why scripting
+        Intro to git
+        Centralised vs Distributed
+        Git repo and commands
+        Shebang
+        Variables
+Session-15:
+    19-SEP-2025
+        Variables
+        Data types
+        Quiz
+Session-16:
+    22-SEP-2025
+        Conditions
+        Exit status
+        Functions
+        Colors
+        Logs
+        Redirections
+Session-17:
+    23-SEP-2025
+        Loops
+        Error handling
+        AWS CLI
+        AWS commands to create instances and R53 records
+        MongoDB Setup through shell script
+Session-18:
+    24-SEP-2025
+        Sed editor
+        Catalogue script
+        Idempotency
+        Set and trap
+Session-19:
+    25-SEP-2025
+        Roboshop Setup completed using shell script
+        Redis
+        MySQL
+        RabbitMQ
+        User
+        Cart
+        Shipping
+        Payment
+        Frontend
+        How to call one script from another script
+        Direct calling
+        Source calling
+        Common script
+Session-20:
+    26-SEP-2025
+        Roboshop completed using common scripts
+        Delete old logs
+        Find command
+        While loop
+        Backup script
