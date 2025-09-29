@@ -1,0 +1,493 @@
+
+PUBLIC & PRIVATE KEY generation:
+        ssh-keygen -f daws-86s
+        ssh -i <private-key> ec2-user@IP
+PORTS:
+        inbound -> SSH 22 0.0.0.0/0
+        outbound -> All traffic -> 0.0.0.0/0
+UNIX COMMANDS:
+        $ -> normal user
+        # -> root user
+
+        touch <file-name> -> create the file
+        ls -> list subdirectories
+
+        cat > file-name
+        enter the text... press enter and then ctrl+d
+
+        > -> redirection
+        >> -> don't replace, just add/append
+
+        rm -r -> delete recursively, means delete the contents also inside the directory
+
+        cd .. -> one step back
+
+        Cd != cd
+
+        ls -l -> alphabetical order
+        ls -lr -> reverse alphabetical order
+        ls -lt -> latest on top
+        ls -ltr -> oldest on top
+
+        grep -> search the text inside file
+
+        grep <word-to-search> <file-name>
+
+        grep -n -> line number
+        grep -c -> count of lines the word occured
+        grep -i -> ignore the case
+        grep -v -> invert, non matching lines
+
+        ~/.ssh/config
+        config should not have any file extensions
+
+        Host *
+            ServerAliveInterval 60
+            ServerAliveCountMax 3
+
+        wget <url> -> Downloads the file
+        curl <url> -> print the information on the screen
+
+        https://raw.githubusercontent.com/daws-86s/notes/refs/heads/main/session-02.txt
+
+        printf Hello World
+
+        echo "Hello World"
+
+        cut command can delimit the text and give us the required fragment
+
+        awk -F "/" '{print $1F}'
+
+        sudo su - -> I will land into root user home directory
+        sudo su -> land into same directory as root
+===========================================================================================
+===========================================================================================
+VIM EDITOR:
+
+        
+        vi improved editor
+
+        touch <file-name>
+        cat >
+        cat >>
+
+        vim <file-name>
+        1. if file already exists, it will open
+        2. if file does not exists, then it will create and open
+
+        Default mode is esc mode.
+
+
+        Colon/Command Mode
+        =================
+        :wq -> write and quit
+        :q! -> quit without saving
+        :q -> just quit
+        :set nu -> display line numbers
+        :<line-number> -> cursor will go that line
+        :/<word-to-search> -> search from top
+        :?<word-to-search> -> search from bottom
+        :<line-number>d -> deletes that line
+        :noh -> no highlight
+        :28s/root/ROOT -> line number 28, replace root with ROOT. It replaces the first occurence in that line
+
+        :29s/root/ROOT/g -> g for global. means 29th line all root occurences should be replaced with ROOT
+
+        :%s/root/ROOT/g -> all lines all occurences in the file
+
+        Esc Mode
+        ============
+        gg --> takes us to top of the file
+        shift+g -> takes us to bottom of the file
+        u -> undo
+        ctrl+r -> redo
+        dd -> deletes the line
+        yy(yank) -> copies the line
+        p -> paste below the line
+        shift+p -> paste above the line
+
+        head <file-name> -> displays top 10 lines of the file
+        tail <file-name> -> displays bottom 10 lines
+
+        head -n 8 | tail -n 3
+
+        55-65
+
+        head -n 65 | tail -n 11
+===========================================================================================
+===========================================================================================
+
+Linux Administration:
+
+        User Management
+
+        User Groups Roles Permissions
+
+        User -> A human
+        Group -> A team of humans
+        Roles -> position
+        Permissions -> Access to the roles
+
+        1. create user
+        2. create group
+        3. add user to the group
+        4. remove user from the group
+        5. remove user
+        6. remove group
+
+        1. create devops group
+        2. create suresh user
+        3. add suresh to devops group
+        4. remove suresh from devops group
+        5. remove suresh user
+
+        useradd suresh -> creates suresh user
+        groupadd devops -> creaes devops group
+
+        id <user-name>
+        id suresh
+        uid=1001(suresh) gid=1001(suresh) groups=1001(suresh)
+
+        when you create user in Linux, by default it will create one group with same username
+
+        /etc/passwd
+        suresh:x:1001:1001::/home/suresh:/bin/bash
+
+        /etc/group
+        devops:x:1002:
+
+        /etc/shadow -> encrypted password
+
+        A user in Linux must have 1 primary group and atleast 1 secondary group
+
+        usermod -g <group-name> <user-name> --> adding suresh to devops group
+        usermod -aG <group-name> <user-name> --> adding suresh to secondary group
+
+        passwd <user-name>
+
+        /etc/ssh/sshd_config --> SSH configuration
+
+        PasswordAuthentication no
+
+        vim /etc/ssh/sshd_config
+        sshd -t -> checks the syntax of ssh
+
+        systemctl restart sshd
+
+        gpasswd -d <user-name> <group-name>
+
+        id suresh
+        suresh suresh suresh
+
+        files and permissions
+        =====================
+        Read    -> 4
+        Write   -> 2
+        Execute -> 1
+
+        -	rw-			r--		r--
+            owner/user	group	others
+            u			   g		o
+            
+        chmod g+w 
+        chmod 744
+
+        File Ownership
+        ================
+        chmod -> either the owner of the file or root
+        chown <user>:<group> file/folder --> not even owner can change the ownership, only root user
+
+        chown -R -> recursive. all files and folders inside
+
+        How a user can login with keys
+        ==============================
+        /home/suresh/.ssh
+        authorized_keys -> suresh public key
+
+        ssh -i suresh suresh@IP
+
+        An employee should generate keys..
+
+        ssh-keygen -f ramesh
+        ramesh.pub
+        ramesh -> private key
+
+        sivakumar should send his public key to admins
+
+        1. useradd sivakumar
+        2. admin should create .ssh folder in /home/sivakumar
+        3. permissions should be 700 for .ssh means only owner has full access
+        4. .ssh ownership should be only sivakumar including group
+        5. create authorized_keys inside .ssh with max permissions 600 and again ownership should be sivakumar
+        6. keep the public file from sivakumar inside authorized_keys
+
+        ssh -i sivakumar sivakumar@3.87.244.153
+
+        /etc/sudoers -> sudoers information
+        vimsudo -> edit safely with syntax checks
+
+        How to give sudo access to user?
+
+        add him to wheel group and then modify /etc/sudoers wheel group without password
+
+        usermod -aG wheel sivakumar
+        /etc/sudoers ->
+
+        how many ports in a computer -> 0 - 65,535
+
+        Delhi -> HYD courier
+
+        gandhi apartments, ameerpeta, hyd, 500082
+        102
+
+        https://facebook.com -> facebook web application
+        username and password we can able to see our home feed
+
+        protocol -> https (443)
+        IP
+===========================================================================================
+===========================================================================================
+Package management
+
+        package managers
+
+        dnf is the command to install/remove the packages from server
+        previously called as yum
+
+        RHEL => dnf install <package-name>
+        Ubuntu => apt-get install <package-name>
+
+        /etc/yum.repos.d
+
+        dnf list installed -> already installed in server
+        dnf list available -> not installed but available in web repos
+
+        install remove update info
+===========================================================================================
+===========================================================================================
+
+Service Management
+        
+        nginx -> http web server
+        systemctl start nginx
+        systemctl status nginx
+
+        http://3.87.244.153:80
+
+        systemctl stop nginx
+        systemctl restart nginx
+
+        systemctl enable nginx -> whenever system restarted automatically this nginx will run
+        systemctl disable nginx
+
+
+        ps -ef -> list all the process running
+        top -> it will display live process with cpu and ram
+
+        kill PID -> request to terminate
+        kill -9 PID -> order to terminate
+
+        netstat -lntp -> shows the ports openend and PID
+
+===========================================================================================
+===========================================================================================
+
+        Type of records
+
+        A -> IpV4 address
+        CNAME --> Another domain
+        MX -> Mail servers
+        TXT -> Domain verrification purpose
+        AAAA -> IpV6
+        NS -> Nameservers, who is controlling the domain
+        SOA -> Who is controlling
+===========================================================================================
+===========================================================================================
+
+Error codes
+
+        2XX -> Success
+        3XX -> Success, but redirection/cache
+        4XX -> client side error
+            400 --> Bad request, data is bad
+            401 --> unauthorised. you need username and password
+            403 --> Forbidden. No access to you
+            404 --> Not found.
+        5xx -> Server side error
+            500 -> Problem inside servers
+            503 -> Service unavailable
+            504 -> Gateway timeout, backend servers are down
+===========================================================================================
+===========================================================================================
+
+inode symlink and hardlink
+
+
+        softlink -> shortcut
+
+        c:\ProgramFiles\chrome.exe
+
+        "C:\Program Files (x86)\Mobatek\MobaXterm\"
+
+        symlink is a shortcut to actual file
+        inodes are diff for symlink and actual file
+        deleting the actual file will not delete symlink, but it breaks
+
+        hardlink
+        ==========
+        same inode since pointing to same file in storage
+        deleting hardlink will not delete the actual file
+===========================================================================================
+===========================================================================================
+
+esc
+            ctrl + ]
+            quit
+===========================================================================================
+===========================================================================================
+Maven:
+        mvn clean package
+
+        Maven Lifecycle
+        =================
+        Start -> End
+
+        compile -> One of the lifecycle phase -> compile the sourcecode into bytecode
+        test -> run the test cases written by developers
+
+        starting from validate the code to deploy into server/maven central
+
+        mvn validate
+        mvn compile -> compile the source code
+        mvn test -> test cases
+        mvn package -> compile successfully, then package into a file
+
+        .jar -> Java archeive file
+        .exe -> is it single file? it is a package application
+        .zip -> a single file, but inside there are multiple files
+
+        packaging formats -> .jar .war .ear
+
+        package = validate+compile+test+package(by default)
+
+        mvn clean -> old compilation or old builds clean
+        mvn validate -> validates the project structure
+
+
+        (repeated)
+        mvn compile -> compile the source code, creates target folder and keep .class files
+        mvn package -> pack/build the application into .jar file in target folder
+        mvn clean -> clean the previous compile or builds
+        mvn test -> run the unit test cases developed by developers
+
+        mvn clean package = clean+validate+compile+test+package
+
+
+        create server
+        configuring the server
+            install programming language
+            create system user
+            create directory
+                download the code
+                unzip the code
+                install dependency
+            create systemctl service
+                daemon-reload
+                restart the service
+
+git clone vs git pull
+=====================
+        clone -> first time downloading the code
+        pull -> just pull the changes
+
+        staging area -> git add <file-name>
+        local commit -> git commit -m "first commit, hello world started"
+        push to central repo -> git push origin main
+        git add . -> all changes will be staged.
+        git add . ; git commit -m "some message"; git push origin main
+
+
+DATATYPES
+
+        integer -> -33,768 to 33,768
+        string -> devops aws shell
+        boolean -> true or false
+        char -> a b c d
+        float -> 33.34
+        decimal -> 33.836419859
+        long -> 9873471328
+
+        0 1 2 3
+        index starts from 0
+
+Redirections
+
+
+        1 -> success
+        2 -> failure
+        & -> success/failure
+
+
+AWS Authentication:
+        authenticate before
+        aws create instance key="" sg-id="" instance-type="t3.micro" --storage="20GB"
+
+        aws configure -> authenticate with AWS
+        aws s3 ls -> no o/p is okay, but error means credentials are wrong
+
+        1. create ec2 instance
+        2. update private ip in r53 record
+        3. if frontend update public ip in frontend.daws86s.fun
+
+        aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-07c8acf3fa6b923fa --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Test}]' --query 'Instances[0].InstanceId' --output tex
+
+        aws ec2 describe-instances --instance-ids i-0682bd1dbd92ce16c --query 'Reservations[0].Instances[0].PublicIpAddress' --output text
+
+        aws ec2 run-instances --image-id ami-09c813fb71547fc4f --instance-type t3.micro --security-group-ids sg-07c8acf3fa6b923fa --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=Test}]' --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text
+        ami-09c813fb71547fc4f
+        sg-07c8acf3fa6b923fa
+
+
+        Variables
+        Data types
+        Conditions
+        Exit staus
+        Functions
+        Loops
+        Redirections and logs
+        Error handling
+
+SED editor
+
+        strealine editor, non-interactive editor
+
+        create the line
+        update the line
+        delete the line
+
+        sed '1i Hello SED' <file-name> -> insert before first line
+        sed '1a Hello' -> insert after first line
+        sed '2d' -> delete 2nd line
+        sed '/Hello/d' -> delete lines where there is Hello
+        sed 's/root/ROOT/' -> substitute the first occurence in every line
+        sed 's/root/ROOT/g' -> substitute all occurences in every line
+        sed '3c Hello change' -> replace 3rd line
+        sed '/error/ c NO-ERROR' -> change the line based on pattern
+
+Logs:
+
+        1. delete old log files
+
+        /var/log/roboshop-logs
+
+        cart-2025-26-09.log
+
+        1. find the files. only .log files
+        2. older than 14 days
+        3. then delete
+
+        find <where-to-find> -name "*.log" -mtime +14
+
+        find / -name "*.log" -mtime +14
+
+        
