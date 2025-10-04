@@ -43,6 +43,12 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+LOGS_FOLDER=/var/log/scriptlog
+SCRIPT_NAME=$( echo "$0" | cut -d "." -f1 )
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
+
+mkdir -p $LOGS_FOLDER
+
 #Condition
 if [ "$USERID" -ne 0 ]; then
     echo  -e " Error: Please run the script with root privileges"
@@ -51,10 +57,10 @@ fi
 
 VALIDATE(){
 if [ "$1" -ne 0 ]; then
-        echo -e " Installing $2 ....$R FAILED $N"
+        echo -e " Installing $2 ....$R FAILED $N" | tee -a "$LOG_FILE"
     
     else
-        echo  -e " Installing $2 .... $G SUCCESS $N"
+        echo  -e " Installing $2 .... $G SUCCESS $N" | tee -a "$LOG_FILE"
 
 fi
 
@@ -62,13 +68,12 @@ fi
 
 #Install package
 
-for package in  "$@"
-    do
+for package in  "$@"; do
 
        # dnf list installed "$package" 
 
-        if ! dnf list installed "$package"; then
-            dnf install "$package" -y
+        if ! dnf list installed "$package" &>>"$LOG_FILE"; then
+            dnf install "$package" -y &>>"$LOG_FILE"
             VALIDATE $? "$package" 
         else
               
