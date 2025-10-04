@@ -15,7 +15,8 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-if [ $USERID -ne 0 ]; then
+if [ $USERID -ne 0 ]
+; then
     echo " ERROR: Please run the script with root privilege"
     exit 1
 fi
