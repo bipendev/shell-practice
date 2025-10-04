@@ -65,7 +65,7 @@ fi
 for package in  "$@"
     do
 
-        dnf ilist installed "$package" 
+        dnf list installed "$package" 
 
         if [ ! "$package" ]; then
             dnf install "$package" -y
