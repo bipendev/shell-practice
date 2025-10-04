@@ -45,7 +45,7 @@ N="\e[0m"
 
 #Condition
 if [ "$USERID" -ne 0 ]; then
-    echo " Error: Please run the script with root privileges"
+    echo  -e " Error: Please run the script with root privileges"
     exit 1
 fi
 
@@ -54,7 +54,7 @@ if [ "$1" -ne 0 ]; then
         echo " Installing $2 ....$R FAILED $N"
     
     else
-        echo " Installing $2 .... $G SUCCESS $N"
+        echo  -e " Installing $2 .... $G SUCCESS $N"
 
 fi
 
@@ -72,7 +72,7 @@ for package in  "$@"
             VALIDATE $? "$package" 
         else
               
-            echo " $package already installed...$Y SKIPPING $N"
+            echo -e " $package already installed...$Y SKIPPING $N"
         fi
     done
 
