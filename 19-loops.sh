@@ -51,7 +51,7 @@ fi
 
 VALIDATE(){
 if [ "$1" -ne 0 ]; then
-        echo " Installing $2 ....$R FAILED $N"
+        echo -e " Installing $2 ....$R FAILED $N"
     
     else
         echo  -e " Installing $2 .... $G SUCCESS $N"
@@ -65,9 +65,9 @@ fi
 for package in  "$@"
     do
 
-        dnf list installed "$package" 
+       # dnf list installed "$package" 
 
-        if [ ! "$package" ]; then
+        if ! dnf list installed "$package"; then
             dnf install "$package" -y
             VALIDATE $? "$package" 
         else
