@@ -46,7 +46,7 @@ N="\e[0m"
 LOGS_FOLDER=/var/log/scriptlog
 SCRIPT_NAME=$( echo "$0" | cut -d "." -f1 )
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME"
-
+# Check logs folder exists
 mkdir -p $LOGS_FOLDER
 
 #Condition
