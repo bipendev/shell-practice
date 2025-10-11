@@ -14,7 +14,7 @@ TAG_NAME="ansible"
 NUM_INSTANCES=$1
 
 if [ -z "$NUM_INSTANCES" ] || ! [[ "$NUM_INSTANCES" =~ ^[0-9]+$ ]] || [ "$NUM_INSTANCES" -le 0 ]; then
-    echo"Usage: $0 <number of instances>"
+    echo "Usage: $0 <number of instances>"
     exit 1
 fi
 
